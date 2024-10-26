@@ -25,7 +25,7 @@
 ### 데이터베이스 모델 (ERD)
 ![QuickDBD-musinsa-test](https://github.com/user-attachments/assets/4223fab4-4692-433c-8fec-accee04ce76a)  
 
-프로젝트에서 사용된 데이터베이스 모델의 **ERD(Entity Relationship Diagram)**입니다.  
+프로젝트에서 사용된 데이터베이스 모델의 ERD입니다.  
 각 도메인 간의 관계를 명확히 표현하며, 주요 엔티티와 속성은 다음과 같습니다.  
 
 #### Brand
