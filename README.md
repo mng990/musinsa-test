@@ -23,9 +23,8 @@
    - 이를 통해 지속적으로 **브랜드 및 상품 정보를 관리**할 수 있습니다.
 
 ### 데이터베이스 모델 (ERD)
-![QuickDBD-musinsa-test](https://github.com/user-attachments/assets/4223fab4-4692-433c-8fec-accee04ce76a)  
-
-프로젝트에서 사용된 데이터베이스 모델의 **ERD(Entity Relationship Diagram)**입니다.  
+![QuickDBD-musinsa-test (1)](https://github.com/user-attachments/assets/367bc45a-e4dd-4903-9984-17b2c06e7e8c)  
+프로젝트에서 사용된 데이터베이스 모델의 **ERD**입니다.  
 각 도메인 간의 관계를 명확히 표현하며, 주요 엔티티와 속성은 다음과 같습니다.  
 
 #### Brand
