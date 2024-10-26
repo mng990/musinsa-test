@@ -22,6 +22,31 @@
    - 운영자는 **새로운 브랜드를 등록**하거나, 기존 브랜드의 **상품을 추가, 업데이트, 삭제**할 수 있습니다.
    - 이를 통해 지속적으로 **브랜드 및 상품 정보를 관리**할 수 있습니다.
 
+### 데이터베이스 모델 (ERD)
+![QuickDBD-musinsa-test](https://github.com/user-attachments/assets/4223fab4-4692-433c-8fec-accee04ce76a)
+프로젝트에서 사용된 데이터베이스 모델의 **ERD(Entity Relationship Diagram)**입니다. 각 도메인 간의 관계를 명확히 표현하며, 주요 엔티티와 속성은 다음과 같습니다:
+#### Brand
+- id (BIGINT): 브랜드 고유 식별자
+- name (VARCHAR(100)): 브랜드 이름
+- created_at (TIMESTAMP): 생성 시간
+- updated_at (TIMESTAMP): 업데이트 시간
+
+#### Category
+- id (BIGINT): 카테고리 고유 식별자
+- name (VARCHAR(50)): 카테고리 이름
+- created_at (TIMESTAMP): 생성 시간
+- updated_at (TIMESTAMP): 업데이트 시간
+
+#### Product
+- id (BIGINT): 상품 고유 식별자
+- price (BIGINT): 상품 가격
+- category_id (BIGINT): 상품이 속한 카테고리 ID (Category와의 외래키 관계)
+- brand_id (BIGINT): 상품이 속한 브랜드 ID (Brand와의 외래키 관계)
+- created_at (TIMESTAMP): 생성 시간
+- updated_at (TIMESTAMP): 업데이트 시간
+
+
+
 ### 패키지 구조 설명 (Musinsa Showcase 프로젝트)
 
 프로젝트는 **클린 아키텍처**를 기반으로 **도메인, 어댑터, 애플리케이션 계층**을 분리하여 유지보수성과 응집도를 높이고 있습니다. 각 패키지의 역할은 다음과 같습니다:
