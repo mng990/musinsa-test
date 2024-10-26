@@ -26,7 +26,7 @@
 
 ![QuickDBD-musinsa-test (1)](https://github.com/user-attachments/assets/367bc45a-e4dd-4903-9984-17b2c06e7e8c)  
 프로젝트에서 사용된 데이터베이스 모델의 **ERD**입니다.  
-각 도메인 간의 관계를 명확히 표현하며, 주요 엔티티와 속성은 다음과 같습니다.  
+주요 엔티티와 속성은 다음과 같습니다.  
 
 #### Brand
 - id (BIGINT): 브랜드 고유 식별자
