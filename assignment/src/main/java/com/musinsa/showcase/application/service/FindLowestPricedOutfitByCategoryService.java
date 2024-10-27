@@ -1,7 +1,6 @@
 package com.musinsa.showcase.application.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +11,7 @@ import com.musinsa.showcase.application.port.dto.OutfitResponse;
 import com.musinsa.showcase.application.port.dto.ProductResponse;
 import com.musinsa.showcase.application.port.in.FindLowestPricedOutfitByCategoryUsecase;
 import com.musinsa.showcase.application.port.out.ReadCategoryPort;
-import com.musinsa.showcase.application.port.out.ReadProductPort;
+import com.musinsa.showcase.domain.Brand;
 import com.musinsa.showcase.domain.Category;
 import com.musinsa.showcase.domain.Product;
 
@@ -21,7 +20,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class FindLowestPricedOutfitService implements FindLowestPricedOutfitByCategoryUsecase {
+public class FindLowestPricedOutfitByCategoryService implements
+	FindLowestPricedOutfitByCategoryUsecase {
 
 	private final ReadCategoryPort readCategoryPort;
 
@@ -29,11 +29,11 @@ public class FindLowestPricedOutfitService implements FindLowestPricedOutfitByCa
 	public ProductResponse findLowestPricedProductByCategory(Category category) {
 		List<Product> products = category.getProducts();
 
-		if(products == null || products.isEmpty()) {
+		if (products == null || products.isEmpty()) {
 			throw ApiException.from(ErrorCode.PRODUCT_NOT_FOUND);
 		}
 
-		if(products.size() == 1) {
+		if (products.size() == 1) {
 			return products.get(0).toResponse();
 		}
 
@@ -45,7 +45,6 @@ public class FindLowestPricedOutfitService implements FindLowestPricedOutfitByCa
 			.get()
 			.toResponse();
 	}
-
 
 	@Override
 	public OutfitResponse findLowestPricedOutfit() {
