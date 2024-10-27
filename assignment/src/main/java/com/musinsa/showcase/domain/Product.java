@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.musinsa.common.entity.BaseEntity;
+import com.musinsa.showcase.application.port.ProductResponse;
 
 @Entity
 @Getter
@@ -29,6 +30,9 @@ public class Product extends BaseEntity {
 
 	@Column(nullable = false)
 	private String name;
+
+	@Column(nullable = false)
+	private Long price;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "brand_id")
@@ -52,10 +56,19 @@ public class Product extends BaseEntity {
 		}
 	}
 
+	public ProductResponse toResponse() {
+		return new ProductResponse(
+			category.getName(),
+			brand.getName(),
+			price
+		);
+	}
+
 	@Builder
-	private Product(String name, Brand brand, Category category) {
+	private Product(String name, Brand brand, Category category, Long price) {
 		this.name = name;
 		setBrand(brand);
 		setCategory(category);
+		this.price = price;
 	}
 }
