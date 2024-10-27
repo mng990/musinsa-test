@@ -7,5 +7,4 @@ import com.musinsa.showcase.domain.Product;
 
 public interface FindProductsByCategory {
 	public List<Product> findProductsByCategory(Category category);
-
 }

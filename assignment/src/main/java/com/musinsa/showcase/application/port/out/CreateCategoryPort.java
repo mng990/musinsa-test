@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.musinsa.showcase.domain.Category;
 
-public interface LoadCategoryPort {
-	Category loadCategory(Long categoryId);
-	List<Category> loadAllCategories();
+public interface CreateCategoryPort {
+	Long save(Category category);
+	List<Long> saveAll(List<Category> categories);
 }

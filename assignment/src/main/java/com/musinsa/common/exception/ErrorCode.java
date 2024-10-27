@@ -20,7 +20,8 @@ public enum ErrorCode {
 	PRODUCT_CREATE_FAIL(HttpStatus.BAD_REQUEST, "상품 작성에 실패하였습니다.", "PRODUCT-004"),
 
 	//Category
-	CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 카테고리를 찾을 수 없습니다.", "CATEGORY-001"),
+	CATEGORY_EMPTY(HttpStatus.NOT_FOUND, "카테고리에 해당하는 상품이 없습니다.", "CATEGORY-000"),
+	CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 카테고리 입니다.", "CATEGORY-001"),
 	CATEGORY_DELETE_FAIL(HttpStatus.BAD_REQUEST, "카테고리 삭제에 실패하였습니다.", "CATEGORY-002"),
 	CATEGORY_UPDATE_FAIL(HttpStatus.BAD_REQUEST, "카테고리 수정에 실패하였습니다.", "CATEGORY-003"),
 	CATEGORY_CREATE_FAIL(HttpStatus.BAD_REQUEST, "카테고리 작성에 실패하였습니다.", "CATEGORY-004"),
@@ -30,6 +31,9 @@ public enum ErrorCode {
 	BRAND_DELETE_FAIL(HttpStatus.BAD_REQUEST, "브랜드 삭제에 실패하였습니다.", "BRAND-002"),
 	BRAND_UPDATE_FAIL(HttpStatus.BAD_REQUEST, "브랜드 수정에 실패하였습니다.", "BRAND-003"),
 	BRAND_CREATE_FAIL(HttpStatus.BAD_REQUEST, "브랜드 작성에 실패하였습니다.", "BRAND-004"),
+
+	// Outfit(코디)
+	OUTFIT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 코디를 찾을 수 없습니다.", "OUTFIT-001"),
 	;
 
 

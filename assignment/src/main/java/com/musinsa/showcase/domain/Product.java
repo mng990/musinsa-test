@@ -16,7 +16,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.musinsa.common.entity.BaseEntity;
-import com.musinsa.showcase.application.port.ProductResponse;
+import com.musinsa.showcase.application.port.dto.ProductResponse;
 
 @Entity
 @Getter
@@ -27,9 +27,6 @@ public class Product extends BaseEntity {
 	@Id @Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@Column(nullable = false)
-	private String name;
 
 	@Column(nullable = false)
 	private Long price;
@@ -44,15 +41,15 @@ public class Product extends BaseEntity {
 
 	public void setCategory(Category category) {
 		this.category = category;
-		if(!category.getProduct().contains(this)) {
-			category.getProduct().add(this);
+		if(!category.getProducts().contains(this)) {
+			category.getProducts().add(this);
 		}
 	}
 
 	public void setBrand(Brand brand){
 		this.brand = brand;
-		if(!brand.getProduct().contains(this)){
-			brand.getProduct().add(this);
+		if(!brand.getProducts().contains(this)){
+			brand.getProducts().add(this);
 		}
 	}
 
@@ -65,8 +62,7 @@ public class Product extends BaseEntity {
 	}
 
 	@Builder
-	private Product(String name, Brand brand, Category category, Long price) {
-		this.name = name;
+	private Product(Brand brand, Category category, Long price) {
 		setBrand(brand);
 		setCategory(category);
 		this.price = price;

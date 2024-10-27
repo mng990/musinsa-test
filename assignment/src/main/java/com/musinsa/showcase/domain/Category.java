@@ -30,11 +30,11 @@ public class Category {
 	@Column(nullable = false)
 	private String name;
 
-	@OneToMany(mappedBy = "brand", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<Product> product = new ArrayList<>();
+	@OneToMany(mappedBy = "category", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	private List<Product> products = new ArrayList<>();
 
 	public void setProduct(Product product) {
-		this.product.add(product);
+		this.products.add(product);
 		if(product.getCategory() != this) {
 			product.setCategory(this);
 		}
