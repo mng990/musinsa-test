@@ -20,8 +20,6 @@ public class CategoryPersistenceAdapter implements CreateCategoryPort, ReadCateg
 
 	@Override
 	public Category loadCategoryBy(String categoryName) {
-		System.out.println(categoryName);
-
 		if(categoryName == null || categoryName.isEmpty()){
 			throw ApiException.from(ErrorCode.CATEGORY_NAME_IS_EMPTY);
 		}

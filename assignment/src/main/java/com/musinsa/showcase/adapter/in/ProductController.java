@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.musinsa.common.dto.DataResponse;
-import com.musinsa.showcase.application.port.dto.MinMaxProductByCategoryResponse;
-import com.musinsa.showcase.application.port.in.FindCategoryUsecase;
-import com.musinsa.showcase.application.port.in.FindLowestAndHighestProductsByCategoryUsecase;
+import com.musinsa.showcase.application.port.dto.product.MinMaxProductByCategoryResponse;
+import com.musinsa.showcase.application.port.in.category.FindCategoryUsecase;
+import com.musinsa.showcase.application.port.in.product.FindLowestAndHighestProductsByCategoryUsecase;
 import com.musinsa.showcase.domain.Category;
 
 import lombok.RequiredArgsConstructor;

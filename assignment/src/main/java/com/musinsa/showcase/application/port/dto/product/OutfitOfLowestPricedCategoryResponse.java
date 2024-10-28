@@ -1,4 +1,4 @@
-package com.musinsa.showcase.application.port.dto;
+package com.musinsa.showcase.application.port.dto.product;
 
 import java.util.List;
 
@@ -10,7 +10,4 @@ public record OutfitOfLowestPricedCategoryResponse(
 	String totalPrice
 )
 {
-	public Long totalPriceByLong() {
-		return Long.parseLong(totalPrice.replaceAll(",", ""));
-	}
 }

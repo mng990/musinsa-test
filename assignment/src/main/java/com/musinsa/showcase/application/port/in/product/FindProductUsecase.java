@@ -1,4 +1,4 @@
-package com.musinsa.showcase.application.port.in;
+package com.musinsa.showcase.application.port.in.product;
 
 import java.util.List;
 

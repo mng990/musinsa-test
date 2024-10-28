@@ -1,4 +1,4 @@
-package com.musinsa.showcase.application.port.dto;
+package com.musinsa.showcase.application.port.dto.brand;
 
 import java.util.List;
 

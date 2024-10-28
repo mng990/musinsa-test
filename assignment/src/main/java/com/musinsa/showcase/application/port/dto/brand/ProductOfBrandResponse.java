@@ -1,4 +1,4 @@
-package com.musinsa.showcase.application.port.dto;
+package com.musinsa.showcase.application.port.dto.brand;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -9,7 +9,4 @@ public record ProductOfBrandResponse(
 	String price
 )
 {
-	public Long priceByLong() {
-		return Long.parseLong(price.replaceAll(",", ""));
-	}
 }

@@ -3,12 +3,14 @@ package com.musinsa.showcase.application.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.musinsa.showcase.application.port.dto.MinMaxProductByCategoryResponse;
-import com.musinsa.showcase.application.port.in.FindCategoryUsecase;
-import com.musinsa.showcase.application.port.in.FindLowestAndHighestProductsByCategoryUsecase;
+import com.musinsa.common.mapper.ProductMapper;
+import com.musinsa.showcase.application.port.dto.product.MinMaxProductByCategoryResponse;
+import com.musinsa.showcase.application.port.in.category.FindCategoryUsecase;
+import com.musinsa.showcase.application.port.in.product.FindLowestAndHighestProductsByCategoryUsecase;
 import com.musinsa.showcase.application.port.out.ReadCategoryPort;
 import com.musinsa.showcase.application.port.out.ReadProductPort;
 import com.musinsa.showcase.domain.Category;
+import com.musinsa.showcase.domain.Product;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,14 +31,13 @@ public class ProductService implements
 
 	@Override
 	public MinMaxProductByCategoryResponse findLowestAndHighestProductByCategory(Category category) {
+		Product minProduct = readProductPort.loadMinProductByCategory(category),
+				maxProduct = readProductPort.loadMaxProductByCategory(category);
+
 		return new MinMaxProductByCategoryResponse(
 			category.getName(),
-			readProductPort
-				.loadMinProductByCategory(category)
-				.toProductOfCategoryResponse(),
-			readProductPort
-				.loadMaxProductByCategory(category)
-				.toProductOfCategoryResponse()
+			ProductMapper.toProductOfCategoryResponse(minProduct),
+			ProductMapper.toProductOfCategoryResponse(maxProduct)
 		);
 	}
 }

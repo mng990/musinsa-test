@@ -16,9 +16,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.musinsa.common.entity.BaseEntity;
-import com.musinsa.showcase.application.port.dto.ProductOfBrandResponse;
-import com.musinsa.showcase.application.port.dto.ProductOfCategoryResponse;
-import com.musinsa.showcase.application.port.dto.ProductResponse;
+import com.musinsa.showcase.application.port.dto.brand.ProductOfBrandResponse;
+import com.musinsa.showcase.application.port.dto.category.ProductOfCategoryResponse;
+import com.musinsa.showcase.application.port.dto.product.ProductResponse;
 
 @Entity
 @Getter
@@ -53,28 +53,6 @@ public class Product extends BaseEntity {
 		if(!brand.getProducts().contains(this)){
 			brand.getProducts().add(this);
 		}
-	}
-
-	public ProductResponse toProductResponse() {
-		return new ProductResponse(
-			category.getName(),
-			brand.getName(),
-			String.format("%,d", price)
-		);
-	}
-
-	public ProductOfCategoryResponse toProductOfCategoryResponse() {
-		return new ProductOfCategoryResponse(
-			brand.getName(),
-			String.format("%,d", price)
-		);
-	}
-
-	public ProductOfBrandResponse toProductOfBrandResponse(){
-		return new ProductOfBrandResponse(
-			category.getName(),
-			String.format("%,d", price)
-		);
 	}
 
 	@Builder
