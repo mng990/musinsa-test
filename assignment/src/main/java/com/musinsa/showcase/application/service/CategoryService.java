@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.musinsa.common.exception.ApiException;
 import com.musinsa.common.exception.ErrorCode;
 import com.musinsa.common.mapper.ProductMapper;
+import com.musinsa.showcase.application.port.in.category.CreateCategoryUsecase;
+import com.musinsa.showcase.application.port.out.category.CreateCategoryPort;
 import com.musinsa.showcase.application.port.out.category.dto.OutfitOfLowestPricedCategoryResponse;
 import com.musinsa.showcase.application.port.out.product.dto.ProductResponse;
 import com.musinsa.showcase.application.port.in.product.FindLowestPricedOutfitByCategoryUsecase;
@@ -21,9 +23,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 public class CategoryService implements
-	FindLowestPricedOutfitByCategoryUsecase {
+	FindLowestPricedOutfitByCategoryUsecase,
+	CreateCategoryUsecase {
 
 	private final ReadCategoryPort readCategoryPort;
+	private final CreateCategoryPort createCategoryPort;
 
 	@Override
 	public ProductResponse findLowestPricedProductByCategory(Category category) {
@@ -51,5 +55,14 @@ public class CategoryService implements
 			.reduce(0L, Long::sum);
 
 		return new OutfitOfLowestPricedCategoryResponse(products, String.format("%,d",totalPrice));
+	}
+
+	@Override
+	@Transactional
+	public List<Long> saveAll(List<Category> categories) {
+		return categories
+			.stream()
+			.map(createCategoryPort::save)
+			.toList();
 	}
 }

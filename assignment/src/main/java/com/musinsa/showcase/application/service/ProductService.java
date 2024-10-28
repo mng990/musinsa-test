@@ -1,5 +1,7 @@
 package com.musinsa.showcase.application.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -121,5 +123,14 @@ public class ProductService implements
 		createProductPort.save(product);
 
 		return product.getId();
+	}
+
+	@Override
+	@Transactional
+	public List<Long> saveAll(List<CreateProductRequest> createProductRequests) {
+		return createProductRequests
+			.stream()
+			.map(this::save)
+			.toList();
 	}
 }
