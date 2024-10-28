@@ -7,6 +7,5 @@ import com.musinsa.showcase.domain.Product;
 
 public interface DeleteProductPort {
 	public void delete(Product product);
-	public void deleteAll(List<Product> productList);
 	public void deleteAllByBrand(Brand brand);
 }

@@ -29,7 +29,7 @@ public class DataInitConfig {
 	private final CreateBrandPort createBrandPort;
 
 	@Bean
-	CommandLineRunner initDatabase(CategoryRepository categoryRepository, BrandRepository brandRepository, ProductRepository productRepository) {
+	public CommandLineRunner initDatabase(CategoryRepository categoryRepository, BrandRepository brandRepository, ProductRepository productRepository) {
 		return args -> {
 			// Initializing Categories
 			List<Category> categories = List.of(

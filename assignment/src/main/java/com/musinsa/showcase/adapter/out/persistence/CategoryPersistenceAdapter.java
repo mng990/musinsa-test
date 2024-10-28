@@ -42,16 +42,17 @@ public class CategoryPersistenceAdapter implements CreateCategoryPort, ReadCateg
 	}
 
 	@Override
-	public Category save(Category category) {
+	public Long save(Category category) {
 		return categoryRepository
-			.save(category);
+			.save(category)
+			.getId();
 	}
 
 	@Override
-	public List<Category> saveAll(List<Category> categories) {
+	public List<Long> saveAll(List<Category> categories) {
 		return categories
 			.stream()
-			.map(categoryRepository::save)
+			.map((c) -> categoryRepository.save(c).getId())
 			.toList();
 	}
 }
