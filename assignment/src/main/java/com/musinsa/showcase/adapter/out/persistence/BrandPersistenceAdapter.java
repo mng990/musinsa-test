@@ -50,7 +50,7 @@ public class BrandPersistenceAdapter implements CreateBrandPort, ReadBrandPort {
 
 		return brands
 			.stream()
-			.max((b1, b2) -> totalPriceByBrand(b1).compareTo(totalPriceByBrand(b2)))
+			.min((b1, b2) -> totalPriceByBrand(b1).compareTo(totalPriceByBrand(b2)))
 			.get();
 	}
 
@@ -80,7 +80,11 @@ public class BrandPersistenceAdapter implements CreateBrandPort, ReadBrandPort {
 
 	@Override
 	public List<Product> loadAllProductsByBrandAndCategory(Brand brand, Category category) {
-		return brandRepository.findProductsByBrandAndCategory(brand, category);
+		return brand
+			.getProducts()
+			.stream()
+			.filter(product -> product.getCategory().equals(category))
+			.toList();
 	}
 
 	protected Long totalPriceByBrand(Brand brand) {

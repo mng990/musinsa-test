@@ -22,7 +22,7 @@ public class CategoryPersistenceAdapter implements CreateCategoryPort, ReadCateg
 	public Category loadCategory(Long categoryId) {
 		return categoryRepository
 			.findById(categoryId)
-			.orElseThrow(() -> ApiException.from(ErrorCode.CATEGORY_EMPTY));
+			.orElseThrow(() -> ApiException.from(ErrorCode.CATEGORY_IS_EMPTY));
 	}
 
 	@Override

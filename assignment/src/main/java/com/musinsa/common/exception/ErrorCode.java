@@ -35,6 +35,7 @@ public enum ErrorCode {
 	BRAND_CREATE_FAIL(HttpStatus.BAD_REQUEST, "브랜드 작성에 실패하였습니다.", "BRAND-004"),
 
 	// Outfit(코디)
+	OUTFIT_IS_EMPTY(HttpStatus.NOT_FOUND, "조건에 부합하는 코디가 없습니다.", "OUTFIT-000"),
 	OUTFIT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 코디를 찾을 수 없습니다.", "OUTFIT-001"),
 	;
 
