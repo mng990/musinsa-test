@@ -41,6 +41,24 @@ public class ProductPersistenceAdapter implements CreateProductPort, ReadProduct
 	}
 
 	@Override
+	public Product loadMinProductByCategory(Category category) {
+		return category
+			.getProducts()
+			.stream()
+			.min((p1, p2) -> p1.getPrice().compareTo(p2.getPrice()))
+			.orElseThrow(()-> ApiException.from(ErrorCode.PRODUCT_IS_EMPTY));
+	}
+
+	@Override
+	public Product loadMaxProductByCategory(Category category) {
+		return category
+			.getProducts()
+			.stream()
+			.max((p1, p2)-> p1.getPrice().compareTo(p2.getPrice()))
+			.orElseThrow(() -> ApiException.from(ErrorCode.PRODUCT_IS_EMPTY));
+	}
+
+	@Override
 	public List<Long> saveAll(List<Product> products) {
 		return products
 			.stream()

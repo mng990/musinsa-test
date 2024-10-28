@@ -26,6 +26,7 @@ public enum ErrorCode {
 	CATEGORY_DELETE_FAIL(HttpStatus.BAD_REQUEST, "카테고리 삭제에 실패하였습니다.", "CATEGORY-002"),
 	CATEGORY_UPDATE_FAIL(HttpStatus.BAD_REQUEST, "카테고리 수정에 실패하였습니다.", "CATEGORY-003"),
 	CATEGORY_CREATE_FAIL(HttpStatus.BAD_REQUEST, "카테고리 작성에 실패하였습니다.", "CATEGORY-004"),
+	CATEGORY_NAME_IS_EMPTY(HttpStatus.BAD_REQUEST, "카테고리 이름이 비어있습니다.", "CATEGORY-005"),
 
 	//Brand
 	BRAND_IS_EMPTY(HttpStatus.NOT_FOUND, "조건에 부합하는 브랜드가 없습니다.", "BRAND-000"),

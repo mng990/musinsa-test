@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 
 import com.musinsa.common.entity.BaseEntity;
 import com.musinsa.showcase.application.port.dto.ProductOfBrandResponse;
+import com.musinsa.showcase.application.port.dto.ProductOfCategoryResponse;
 import com.musinsa.showcase.application.port.dto.ProductResponse;
 
 @Entity
@@ -57,6 +58,13 @@ public class Product extends BaseEntity {
 	public ProductResponse toProductResponse() {
 		return new ProductResponse(
 			category.getName(),
+			brand.getName(),
+			String.format("%,d", price)
+		);
+	}
+
+	public ProductOfCategoryResponse toProductOfCategoryResponse() {
+		return new ProductOfCategoryResponse(
 			brand.getName(),
 			String.format("%,d", price)
 		);

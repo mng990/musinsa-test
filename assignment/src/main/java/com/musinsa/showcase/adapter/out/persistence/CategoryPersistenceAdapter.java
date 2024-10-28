@@ -19,7 +19,20 @@ public class CategoryPersistenceAdapter implements CreateCategoryPort, ReadCateg
 	private final CategoryRepository categoryRepository;
 
 	@Override
-	public Category loadCategory(Long categoryId) {
+	public Category loadCategoryBy(String categoryName) {
+		System.out.println(categoryName);
+
+		if(categoryName == null || categoryName.isEmpty()){
+			throw ApiException.from(ErrorCode.CATEGORY_NAME_IS_EMPTY);
+		}
+
+		return categoryRepository
+			.findCategoryByName(categoryName)
+			.orElseThrow(() -> ApiException.from(ErrorCode.CATEGORY_NOT_FOUND));
+	}
+
+	@Override
+	public Category loadCategoryBy(Long categoryId) {
 		return categoryRepository
 			.findById(categoryId)
 			.orElseThrow(() -> ApiException.from(ErrorCode.CATEGORY_IS_EMPTY));
@@ -27,14 +40,15 @@ public class CategoryPersistenceAdapter implements CreateCategoryPort, ReadCateg
 
 	@Override
 	public List<Category> loadAllCategories() {
-		return categoryRepository.findAll();
+		return categoryRepository
+			.findAll();
 	}
 
 	@Override
 	public Long save(Category category) {
 		return categoryRepository
-				.save(category)
-				.getId();
+			.save(category)
+			.getId();
 	}
 
 	@Override
