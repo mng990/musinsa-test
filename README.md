@@ -113,7 +113,7 @@
    ./gradlew build
    ```
 
-2. **테스트**: Unit Test와 Integration Test가 포함되어 있으며, 다음 명령어로 테스트를 실행할 수 있습니다.
+2. **테스트**: 다음 명령어로 테스트를 실행할 수 있습니다.
 
    ```
    ./gradlew test
