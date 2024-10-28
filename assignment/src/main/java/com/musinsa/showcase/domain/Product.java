@@ -40,7 +40,7 @@ public class Product extends BaseEntity {
 
 	public void setCategory(Category category) {
 		if(this.category != null) {
-			this.category.getProducts().remove(this);
+			this.category.removeProduct(this);
 		}
 
 		this.category = category;
@@ -52,7 +52,7 @@ public class Product extends BaseEntity {
 
 	public void setBrand(Brand brand){
 		if(this.brand != null){
-			this.brand.getProducts().remove(this);
+			this.brand.removeProduct(this);
 		}
 
 		this.brand = brand;
@@ -63,22 +63,18 @@ public class Product extends BaseEntity {
 
 	public void unlinkProduct() {
 		if(this.category != null) {
-			this.category.getProducts().remove(this);
+			this.category.removeProduct(this);
 			this.category = null;
 		}
 		if(this.brand != null) {
-			this.brand.getProducts().remove(this);
+			this.brand.removeProduct(this);
 			this.brand = null;
 		}
 	}
 
 	public void update(Category category, Brand brand, Long price){
-		if(category != null){
-			setCategory(category);
-		}
-		if(brand != null){
-			setBrand(brand);
-		}
+		setCategory(category);
+		setBrand(brand);
 		this.price = price;
 	}
 

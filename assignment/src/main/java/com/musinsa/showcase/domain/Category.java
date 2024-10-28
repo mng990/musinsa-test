@@ -40,6 +40,13 @@ public class Category {
 		}
 	}
 
+	public void removeProduct(Product product) {
+		if(product.getCategory() == this) {
+			product.setCategory(null);
+			this.products.remove(product);
+		}
+	}
+
 	@Builder
 	public Category(String name) {
 		this.name = name;

@@ -42,6 +42,13 @@ public class Brand extends BaseEntity {
 		}
 	}
 
+	public void removeProduct(Product product) {
+		if(product.getBrand() == this) {
+			this.products.remove(product);
+			product.setBrand(null);
+		}
+	}
+
 	public void update(String name) {
 		this.name = name;
 	}

@@ -89,7 +89,7 @@ public class ProductPersistenceAdapter implements
 	@Override
 	public void deleteAllByBrand(Brand brand) {
 		List<Product> products = productRepository
-			.findByBrand(brand);
+				.findByBrand(brand);
 
 		if(products.isEmpty()) return;
 		productRepository.deleteAll(products);
