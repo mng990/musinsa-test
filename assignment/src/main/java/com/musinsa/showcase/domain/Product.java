@@ -16,9 +16,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.musinsa.common.entity.BaseEntity;
-import com.musinsa.showcase.application.port.dto.brand.ProductOfBrandResponse;
-import com.musinsa.showcase.application.port.dto.category.ProductOfCategoryResponse;
-import com.musinsa.showcase.application.port.dto.product.ProductResponse;
 
 @Entity
 @Getter

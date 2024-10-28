@@ -9,13 +9,12 @@ import com.musinsa.common.exception.ApiException;
 import com.musinsa.common.exception.ErrorCode;
 import com.musinsa.common.mapper.PriceMapper;
 import com.musinsa.common.mapper.ProductMapper;
-import com.musinsa.showcase.application.port.dto.brand.OutfitOfBrandResponse;
-import com.musinsa.showcase.application.port.dto.product.OutfitOfLowestPricedBrandResponse;
-import com.musinsa.showcase.application.port.dto.brand.ProductOfBrandResponse;
+import com.musinsa.showcase.application.port.dto.OutfitOfBrandResponse;
+import com.musinsa.showcase.application.port.dto.OutfitOfLowestPricedBrandResponse;
+import com.musinsa.showcase.application.port.dto.ProductOfBrandResponse;
 import com.musinsa.showcase.application.port.in.product.FindLowestPricedOutfitByBrandUsecase;
 import com.musinsa.showcase.application.port.out.ReadBrandPort;
 import com.musinsa.showcase.domain.Brand;
-import com.musinsa.showcase.domain.Product;
 
 import lombok.RequiredArgsConstructor;
 

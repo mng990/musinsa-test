@@ -1,4 +1,4 @@
-package com.musinsa.showcase.application.port.dto.brand;
+package com.musinsa.showcase.application.port.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

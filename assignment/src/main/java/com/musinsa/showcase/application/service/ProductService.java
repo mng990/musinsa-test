@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.musinsa.common.mapper.ProductMapper;
-import com.musinsa.showcase.application.port.dto.product.MinMaxProductByCategoryResponse;
+import com.musinsa.showcase.application.port.dto.MinMaxProductByCategoryResponse;
 import com.musinsa.showcase.application.port.in.category.FindCategoryUsecase;
 import com.musinsa.showcase.application.port.in.product.FindLowestAndHighestProductsByCategoryUsecase;
 import com.musinsa.showcase.application.port.out.ReadCategoryPort;

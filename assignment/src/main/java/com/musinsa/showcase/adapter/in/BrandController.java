@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.musinsa.common.dto.DataResponse;
-import com.musinsa.showcase.application.port.dto.product.OutfitOfLowestPricedBrandResponse;
+import com.musinsa.showcase.application.port.dto.OutfitOfLowestPricedBrandResponse;
 import com.musinsa.showcase.application.service.BrandService;
 
 import lombok.RequiredArgsConstructor;

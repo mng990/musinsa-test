@@ -1,4 +1,4 @@
-package com.musinsa.showcase.application.port.dto.category;
+package com.musinsa.showcase.application.port.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
