@@ -7,10 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.musinsa.common.exception.ApiException;
 import com.musinsa.common.exception.ErrorCode;
-import com.musinsa.showcase.application.port.dto.OutfitOfLowestPricedCategoryResponse;
-import com.musinsa.showcase.application.port.dto.ProductResponse;
-import com.musinsa.showcase.application.port.in.FindLowestPricedOutfitByCategoryUsecase;
-import com.musinsa.showcase.application.port.out.ReadCategoryPort;
+import com.musinsa.common.mapper.ProductMapper;
+import com.musinsa.showcase.application.port.out.category.dto.OutfitOfLowestPricedCategoryResponse;
+import com.musinsa.showcase.application.port.out.product.dto.ProductResponse;
+import com.musinsa.showcase.application.port.in.product.FindLowestPricedOutfitByCategoryUsecase;
+import com.musinsa.showcase.application.port.out.category.ReadCategoryPort;
 import com.musinsa.showcase.domain.Category;
 import com.musinsa.showcase.domain.Product;
 
@@ -28,36 +29,25 @@ public class CategoryService implements
 	public ProductResponse findLowestPricedProductByCategory(Category category) {
 		List<Product> products = category.getProducts();
 
-		if (products == null || products.isEmpty()) {
-			throw ApiException.from(ErrorCode.PRODUCT_NOT_FOUND);
-		}
-
-		if (products.size() == 1) {
-			return products.get(0).toProductResponse();
-		}
-
-		return products
+		Product product = products
 			.stream()
-			.min((p1, p2) -> {
-				return p1.getPrice().compareTo(p2.getPrice());
-			})
-			.get()
-			.toProductResponse();
+			.min((p1, p2) -> p1.getPrice().compareTo(p2.getPrice()))
+			.orElseThrow(() -> ApiException.from(ErrorCode.PRODUCT_NOT_FOUND));
+
+		return ProductMapper.toProductResponse(product);
 	}
 
 	@Override
 	public OutfitOfLowestPricedCategoryResponse findLowestPricedOutfit() {
 		List<ProductResponse> products = readCategoryPort
-			.loadAllCategories()
+			.findAllCategories()
 			.stream()
 			.map(this::findLowestPricedProductByCategory)
 			.toList();
 
 		Long totalPrice = products
 			.stream()
-			.map((p) -> {
-				return Long.parseLong(p.price().replace(",",""));
-			})
+			.map((p) -> Long.parseLong(p.price().replace(",","")))
 			.reduce(0L, Long::sum);
 
 		return new OutfitOfLowestPricedCategoryResponse(products, String.format("%,d",totalPrice));

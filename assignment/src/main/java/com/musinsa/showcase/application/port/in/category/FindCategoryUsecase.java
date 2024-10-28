@@ -1,4 +1,4 @@
-package com.musinsa.showcase.application.port.in;
+package com.musinsa.showcase.application.port.in.category;
 
 import com.musinsa.showcase.domain.Category;
 

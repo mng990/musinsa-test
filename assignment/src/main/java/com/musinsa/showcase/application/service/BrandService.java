@@ -7,34 +7,53 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.musinsa.common.exception.ApiException;
 import com.musinsa.common.exception.ErrorCode;
-import com.musinsa.showcase.application.port.dto.OutfitOfBrandResponse;
-import com.musinsa.showcase.application.port.dto.OutfitOfLowestPricedBrandResponse;
-import com.musinsa.showcase.application.port.dto.ProductOfBrandResponse;
-import com.musinsa.showcase.application.port.in.FindLowestPricedOutfitByBrandUsecase;
-import com.musinsa.showcase.application.port.out.ReadBrandPort;
+import com.musinsa.common.mapper.PriceMapper;
+import com.musinsa.common.mapper.ProductMapper;
+import com.musinsa.showcase.application.port.in.brand.dto.CreateBrandRequest;
+import com.musinsa.showcase.application.port.in.brand.dto.DeleteBrandRequest;
+import com.musinsa.showcase.application.port.in.brand.dto.UpdateBrandRequest;
+import com.musinsa.showcase.application.port.out.brand.dto.OutfitOfBrandResponse;
+import com.musinsa.showcase.application.port.out.brand.dto.OutfitOfLowestPricedBrandResponse;
+import com.musinsa.showcase.application.port.out.brand.dto.ProductOfBrandResponse;
+import com.musinsa.showcase.application.port.in.brand.CreateBrandUsecase;
+import com.musinsa.showcase.application.port.in.brand.DeleteBrandUsecase;
+import com.musinsa.showcase.application.port.in.brand.UpdateBrandUsecase;
+import com.musinsa.showcase.application.port.in.product.FindLowestPricedOutfitByBrandUsecase;
+import com.musinsa.showcase.application.port.out.brand.CreateBrandPort;
+import com.musinsa.showcase.application.port.out.brand.DeleteBrandPort;
+import com.musinsa.showcase.application.port.out.brand.ReadBrandPort;
+import com.musinsa.showcase.application.port.out.product.DeleteProductPort;
 import com.musinsa.showcase.domain.Brand;
-import com.musinsa.showcase.domain.Product;
 
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class BrandService implements
-	FindLowestPricedOutfitByBrandUsecase {
+	FindLowestPricedOutfitByBrandUsecase,
+	CreateBrandUsecase,
+	UpdateBrandUsecase,
+	DeleteBrandUsecase {
 
 	private final ReadBrandPort readBrandPort;
+	private final CreateBrandPort createBrandPort;
+	private final DeleteBrandPort deleteBrandPort;
+	private final DeleteProductPort deleteProductPort;
+
+	private final EntityManager em;
 
 	@Override
 	public OutfitOfLowestPricedBrandResponse findOutfitOfLowestPricedBrand() {
 		Brand brand = readBrandPort
-			.loadLowestPricedBrand();
+			.findLowestPricedBrand();
 
 		List<ProductOfBrandResponse> outfit =
 			readBrandPort
-				.loadLowestPricedProductsByBrand(brand)
+				.findLowestPricedProductsByBrand(brand)
 				.stream()
-				.map(Product::toProductOfBrandResponse)
+				.map(ProductMapper::toProductOfBrandResponse)
 				.toList();
 
 		if(outfit.isEmpty()){
@@ -43,11 +62,45 @@ public class BrandService implements
 
 		Long totalPrice = outfit
 			.stream()
-			.map(ProductOfBrandResponse::priceByLong)
+			.map((p) -> PriceMapper.stringToLong(p.price()))
 			.reduce(0L, Long::sum);
 
 		return new OutfitOfLowestPricedBrandResponse(
 			new OutfitOfBrandResponse(brand.getName(), outfit, String.format("%,d", totalPrice))
 		);
+	}
+
+	@Override
+	@Transactional
+	public Long save(CreateBrandRequest createBrandRequest) {
+		Brand brand = Brand
+			.builder()
+			.name(createBrandRequest.name())
+			.build();
+
+		createBrandPort.save(brand);
+		em.flush();
+		return brand.getId();
+	}
+
+	@Override
+	@Transactional
+	public void delete(DeleteBrandRequest deleteBrandRequest) {
+		Brand brand = readBrandPort
+			.findById(deleteBrandRequest.brandId())
+			.orElseThrow(() -> ApiException.from(ErrorCode.BRAND_NOT_FOUND));
+
+		deleteProductPort.deleteAllByBrand(brand);
+		deleteBrandPort.delete(brand);
+	}
+
+	@Override
+	@Transactional
+	public void update(UpdateBrandRequest updateBrandRequest) {
+		Brand brand = readBrandPort
+			.findById(updateBrandRequest.brandId())
+			.orElseThrow(() -> ApiException.from(ErrorCode.BRAND_NOT_FOUND));
+
+		brand.update(updateBrandRequest.name());
 	}
 }

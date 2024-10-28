@@ -1,6 +1,8 @@
-package com.musinsa.showcase.application.port.dto;
+package com.musinsa.showcase.application.port.out.brand.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import jakarta.validation.constraints.NotNull;
 
 public record ProductOfBrandResponse(
 	@JsonProperty("카테고리")
@@ -9,7 +11,4 @@ public record ProductOfBrandResponse(
 	String price
 )
 {
-	public Long priceByLong() {
-		return Long.parseLong(price.replaceAll(",", ""));
-	}
 }

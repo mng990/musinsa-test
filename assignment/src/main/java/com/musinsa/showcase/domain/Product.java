@@ -16,9 +16,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.musinsa.common.entity.BaseEntity;
-import com.musinsa.showcase.application.port.dto.ProductOfBrandResponse;
-import com.musinsa.showcase.application.port.dto.ProductOfCategoryResponse;
-import com.musinsa.showcase.application.port.dto.ProductResponse;
 
 @Entity
 @Getter
@@ -42,39 +39,47 @@ public class Product extends BaseEntity {
 	private Category category;
 
 	public void setCategory(Category category) {
+		if(this.category != null) {
+			this.category.getProducts().remove(this);
+		}
+
 		this.category = category;
+
 		if(!category.getProducts().contains(this)) {
 			category.getProducts().add(this);
 		}
 	}
 
 	public void setBrand(Brand brand){
+		if(this.brand != null){
+			this.brand.getProducts().remove(this);
+		}
+
 		this.brand = brand;
 		if(!brand.getProducts().contains(this)){
 			brand.getProducts().add(this);
 		}
 	}
 
-	public ProductResponse toProductResponse() {
-		return new ProductResponse(
-			category.getName(),
-			brand.getName(),
-			String.format("%,d", price)
-		);
+	public void unlinkProduct() {
+		if(this.category != null) {
+			this.category.getProducts().remove(this);
+			this.category = null;
+		}
+		if(this.brand != null) {
+			this.brand.getProducts().remove(this);
+			this.brand = null;
+		}
 	}
 
-	public ProductOfCategoryResponse toProductOfCategoryResponse() {
-		return new ProductOfCategoryResponse(
-			brand.getName(),
-			String.format("%,d", price)
-		);
-	}
-
-	public ProductOfBrandResponse toProductOfBrandResponse(){
-		return new ProductOfBrandResponse(
-			category.getName(),
-			String.format("%,d", price)
-		);
+	public void update(Category category, Brand brand, Long price){
+		if(category != null){
+			setCategory(category);
+		}
+		if(brand != null){
+			setBrand(brand);
+		}
+		this.price = price;
 	}
 
 	@Builder
