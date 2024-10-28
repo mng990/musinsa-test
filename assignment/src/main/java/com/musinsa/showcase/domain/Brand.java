@@ -33,10 +33,10 @@ public class Brand extends BaseEntity {
 	private String name;
 
 	@OneToMany(mappedBy = "brand", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	private List<Product> product = new ArrayList<>();
+	private List<Product> products = new ArrayList<>();
 
 	public void setBrand(Product product) {
-		this.product.add(product);
+		this.products.add(product);
 		if(product.getBrand() != this) {
 			product.setBrand(this);
 		}

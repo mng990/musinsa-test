@@ -16,6 +16,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import com.musinsa.common.entity.BaseEntity;
+import com.musinsa.showcase.application.port.dto.ProductOfBrandResponse;
+import com.musinsa.showcase.application.port.dto.ProductResponse;
 
 @Entity
 @Getter
@@ -28,7 +30,7 @@ public class Product extends BaseEntity {
 	private Long id;
 
 	@Column(nullable = false)
-	private String name;
+	private Long price;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "brand_id")
@@ -40,22 +42,37 @@ public class Product extends BaseEntity {
 
 	public void setCategory(Category category) {
 		this.category = category;
-		if(!category.getProduct().contains(this)) {
-			category.getProduct().add(this);
+		if(!category.getProducts().contains(this)) {
+			category.getProducts().add(this);
 		}
 	}
 
 	public void setBrand(Brand brand){
 		this.brand = brand;
-		if(!brand.getProduct().contains(this)){
-			brand.getProduct().add(this);
+		if(!brand.getProducts().contains(this)){
+			brand.getProducts().add(this);
 		}
 	}
 
+	public ProductResponse toProductResponse() {
+		return new ProductResponse(
+			category.getName(),
+			brand.getName(),
+			String.format("%,d", price)
+		);
+	}
+
+	public ProductOfBrandResponse toProductOfBrandResponse(){
+		return new ProductOfBrandResponse(
+			category.getName(),
+			String.format("%,d", price)
+		);
+	}
+
 	@Builder
-	private Product(String name, Brand brand, Category category) {
-		this.name = name;
+	private Product(Brand brand, Category category, Long price) {
 		setBrand(brand);
 		setCategory(category);
+		this.price = price;
 	}
 }

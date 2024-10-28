@@ -14,22 +14,29 @@ public enum ErrorCode {
 	INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부에서 에러가 발생하였습니다.", "COMMON-003"),
 
 	//Product
+	PRODUCT_IS_EMPTY(HttpStatus.NOT_FOUND, "조건에 부합하는 상품이 존재하지 않습니다.", "PRODUCT-000"),
 	PRODUCT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 상품을 찾을 수 없습니다.", "PRODUCT-001"),
 	PRODUCT_DELETE_FAIL(HttpStatus.BAD_REQUEST, "상품 삭제에 실패하였습니다.", "PRODUCT-002"),
 	PRODUCT_UPDATE_FAIL(HttpStatus.BAD_REQUEST, "상품 수정에 실패하였습니다.", "PRODUCT-003"),
 	PRODUCT_CREATE_FAIL(HttpStatus.BAD_REQUEST, "상품 작성에 실패하였습니다.", "PRODUCT-004"),
 
 	//Category
-	CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 카테고리를 찾을 수 없습니다.", "CATEGORY-001"),
+	CATEGORY_IS_EMPTY(HttpStatus.NOT_FOUND, "조건에 부합하는 카테고리가 없습니다.", "CATEGORY-000"),
+	CATEGORY_NOT_FOUND(HttpStatus.NOT_FOUND, "존재하지 않는 카테고리 입니다.", "CATEGORY-001"),
 	CATEGORY_DELETE_FAIL(HttpStatus.BAD_REQUEST, "카테고리 삭제에 실패하였습니다.", "CATEGORY-002"),
 	CATEGORY_UPDATE_FAIL(HttpStatus.BAD_REQUEST, "카테고리 수정에 실패하였습니다.", "CATEGORY-003"),
 	CATEGORY_CREATE_FAIL(HttpStatus.BAD_REQUEST, "카테고리 작성에 실패하였습니다.", "CATEGORY-004"),
 
 	//Brand
+	BRAND_IS_EMPTY(HttpStatus.NOT_FOUND, "조건에 부합하는 브랜드가 없습니다.", "BRAND-000"),
 	BRAND_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 브랜드를 찾을 수 없습니다.", "BRAND-001"),
 	BRAND_DELETE_FAIL(HttpStatus.BAD_REQUEST, "브랜드 삭제에 실패하였습니다.", "BRAND-002"),
 	BRAND_UPDATE_FAIL(HttpStatus.BAD_REQUEST, "브랜드 수정에 실패하였습니다.", "BRAND-003"),
 	BRAND_CREATE_FAIL(HttpStatus.BAD_REQUEST, "브랜드 작성에 실패하였습니다.", "BRAND-004"),
+
+	// Outfit(코디)
+	OUTFIT_IS_EMPTY(HttpStatus.NOT_FOUND, "조건에 부합하는 코디가 없습니다.", "OUTFIT-000"),
+	OUTFIT_NOT_FOUND(HttpStatus.NOT_FOUND, "해당하는 코디를 찾을 수 없습니다.", "OUTFIT-001"),
 	;
 
 
