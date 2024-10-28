@@ -1,6 +1,7 @@
-package com.musinsa.showcase.application.port.dto;
+package com.musinsa.showcase.application.port.out.product.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.musinsa.showcase.application.port.out.category.dto.ProductOfCategoryResponse;
 
 public record MinMaxProductByCategoryResponse(
 	@JsonProperty("카테고리")

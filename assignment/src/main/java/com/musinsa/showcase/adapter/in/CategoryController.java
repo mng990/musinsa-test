@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.musinsa.common.dto.DataResponse;
-import com.musinsa.showcase.application.port.dto.OutfitOfLowestPricedCategoryResponse;
+import com.musinsa.showcase.application.port.out.category.dto.OutfitOfLowestPricedCategoryResponse;
 import com.musinsa.showcase.application.port.in.product.FindLowestPricedOutfitByCategoryUsecase;
 
 import lombok.RequiredArgsConstructor;

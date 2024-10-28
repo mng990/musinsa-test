@@ -1,13 +1,14 @@
 package com.musinsa.showcase.adapter.out.persistence;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
 import com.musinsa.common.exception.ApiException;
 import com.musinsa.common.exception.ErrorCode;
-import com.musinsa.showcase.application.port.out.CreateCategoryPort;
-import com.musinsa.showcase.application.port.out.ReadCategoryPort;
+import com.musinsa.showcase.application.port.out.category.CreateCategoryPort;
+import com.musinsa.showcase.application.port.out.category.ReadCategoryPort;
 import com.musinsa.showcase.domain.Category;
 
 import lombok.RequiredArgsConstructor;
@@ -19,41 +20,38 @@ public class CategoryPersistenceAdapter implements CreateCategoryPort, ReadCateg
 	private final CategoryRepository categoryRepository;
 
 	@Override
-	public Category loadCategoryBy(String categoryName) {
+	public Optional<Category> findByName(String categoryName) {
 		if(categoryName == null || categoryName.isEmpty()){
 			throw ApiException.from(ErrorCode.CATEGORY_NAME_IS_EMPTY);
 		}
 
 		return categoryRepository
-			.findCategoryByName(categoryName)
-			.orElseThrow(() -> ApiException.from(ErrorCode.CATEGORY_NOT_FOUND));
+			.findByName(categoryName);
 	}
 
 	@Override
-	public Category loadCategoryBy(Long categoryId) {
-		return categoryRepository
-			.findById(categoryId)
-			.orElseThrow(() -> ApiException.from(ErrorCode.CATEGORY_IS_EMPTY));
-	}
-
-	@Override
-	public List<Category> loadAllCategories() {
+	public List<Category> findAllCategories() {
 		return categoryRepository
 			.findAll();
 	}
 
 	@Override
-	public Long save(Category category) {
+	public Optional<Category> findById(Long categoryId) {
 		return categoryRepository
-			.save(category)
-			.getId();
+			.findById(categoryId);
 	}
 
 	@Override
-	public List<Long> saveAll(List<Category> categories) {
+	public Category save(Category category) {
+		return categoryRepository
+			.save(category);
+	}
+
+	@Override
+	public List<Category> saveAll(List<Category> categories) {
 		return categories
 			.stream()
-			.map(this::save)
+			.map(categoryRepository::save)
 			.toList();
 	}
 }

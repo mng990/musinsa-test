@@ -9,5 +9,6 @@ import com.musinsa.showcase.domain.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
-	Optional<Category> findCategoryByName(String name);
+	Optional<Category> findByName(String name);
+	Optional<Category> findById(Long categoryId);
 }

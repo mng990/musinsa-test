@@ -39,17 +39,47 @@ public class Product extends BaseEntity {
 	private Category category;
 
 	public void setCategory(Category category) {
+		if(this.category != null) {
+			this.category.getProducts().remove(this);
+		}
+
 		this.category = category;
+
 		if(!category.getProducts().contains(this)) {
 			category.getProducts().add(this);
 		}
 	}
 
 	public void setBrand(Brand brand){
+		if(this.brand != null){
+			this.brand.getProducts().remove(this);
+		}
+
 		this.brand = brand;
 		if(!brand.getProducts().contains(this)){
 			brand.getProducts().add(this);
 		}
+	}
+
+	public void unlinkProduct() {
+		if(this.category != null) {
+			this.category.getProducts().remove(this);
+			this.category = null;
+		}
+		if(this.brand != null) {
+			this.brand.getProducts().remove(this);
+			this.brand = null;
+		}
+	}
+
+	public void update(Category category, Brand brand, Long price){
+		if(category != null){
+			setCategory(category);
+		}
+		if(brand != null){
+			setBrand(brand);
+		}
+		this.price = price;
 	}
 
 	@Builder

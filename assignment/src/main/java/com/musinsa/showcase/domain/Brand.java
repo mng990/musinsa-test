@@ -32,7 +32,7 @@ public class Brand extends BaseEntity {
 	@Column(nullable = false)
 	private String name;
 
-	@OneToMany(mappedBy = "brand", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToMany(mappedBy = "brand", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, orphanRemoval = true)
 	private List<Product> products = new ArrayList<>();
 
 	public void setBrand(Product product) {
@@ -42,7 +42,11 @@ public class Brand extends BaseEntity {
 		}
 	}
 
-	@Builder
+	public void update(String name) {
+		this.name = name;
+	}
+
+	@Builder(toBuilder = true)
 	private Brand(String name) {
 		this.name = name;
 	}

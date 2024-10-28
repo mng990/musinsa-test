@@ -1,8 +1,8 @@
 package com.musinsa.common.mapper;
 
-import com.musinsa.showcase.application.port.dto.ProductOfBrandResponse;
-import com.musinsa.showcase.application.port.dto.ProductOfCategoryResponse;
-import com.musinsa.showcase.application.port.dto.ProductResponse;
+import com.musinsa.showcase.application.port.out.brand.dto.ProductOfBrandResponse;
+import com.musinsa.showcase.application.port.out.category.dto.ProductOfCategoryResponse;
+import com.musinsa.showcase.application.port.out.product.dto.ProductResponse;
 import com.musinsa.showcase.domain.Product;
 
 public class ProductMapper {

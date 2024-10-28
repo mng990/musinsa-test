@@ -1,12 +1,12 @@
-package com.musinsa.showcase.application.port.dto;
+package com.musinsa.showcase.application.port.out.brand.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public record ProductResponse(
+import jakarta.validation.constraints.NotNull;
+
+public record ProductOfBrandResponse(
 	@JsonProperty("카테고리")
 	String category,
-	@JsonProperty("브랜드")
-	String brand,
 	@JsonProperty("가격")
 	String price
 )

@@ -7,8 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import com.musinsa.common.exception.ApiException;
 import com.musinsa.common.exception.ErrorCode;
-import com.musinsa.showcase.application.port.out.CreateProductPort;
-import com.musinsa.showcase.application.port.out.ReadProductPort;
+import com.musinsa.showcase.application.port.out.product.CreateProductPort;
+import com.musinsa.showcase.application.port.out.product.DeleteProductPort;
+import com.musinsa.showcase.application.port.out.product.ReadProductPort;
+import com.musinsa.showcase.domain.Brand;
 import com.musinsa.showcase.domain.Category;
 import com.musinsa.showcase.domain.Product;
 
@@ -17,31 +19,33 @@ import lombok.RequiredArgsConstructor;
 @Component
 @Repository
 @RequiredArgsConstructor
-public class ProductPersistenceAdapter implements CreateProductPort, ReadProductPort {
+public class ProductPersistenceAdapter implements
+	CreateProductPort,
+	ReadProductPort,
+	DeleteProductPort {
 
 	private final ProductRepository productRepository;
 
 	@Override
-	public Product loadProduct(Long productId) {
+	public Product findProduct(Long productId) {
 		return productRepository
 			.findById(productId)
 			.orElseThrow(() -> ApiException.from(ErrorCode.PRODUCT_NOT_FOUND));
 	}
 
 	@Override
-	public List<Product> loadProductsByCategory(Category category) {
+	public List<Product> findProductsByCategory(Category category) {
 		return productRepository.findByCategory(category);
 	}
 
 	@Override
-	public Long save(Product product) {
+	public Product save(Product product) {
 		return productRepository
-				.save(product)
-				.getId();
+				.save(product);
 	}
 
 	@Override
-	public Product loadMinProductByCategory(Category category) {
+	public Product findMinProductByCategory(Category category) {
 		return category
 			.getProducts()
 			.stream()
@@ -50,7 +54,7 @@ public class ProductPersistenceAdapter implements CreateProductPort, ReadProduct
 	}
 
 	@Override
-	public Product loadMaxProductByCategory(Category category) {
+	public Product findMaxProductByCategory(Category category) {
 		return category
 			.getProducts()
 			.stream()
@@ -59,10 +63,35 @@ public class ProductPersistenceAdapter implements CreateProductPort, ReadProduct
 	}
 
 	@Override
-	public List<Long> saveAll(List<Product> products) {
+	public Boolean exists(Product product) {
+		return productRepository
+			.existsById(product.getId());
+	}
+
+	@Override
+	public List<Product> saveAll(List<Product> products) {
 		return products
 			.stream()
 			.map(this::save)
 			.toList();
+	}
+
+	@Override
+	public void delete(Product product) {
+		productRepository.delete(product);
+	}
+
+	@Override
+	public void deleteAll(List<Product> productList) {
+		productRepository.deleteAll(productList);
+	}
+
+	@Override
+	public void deleteAllByBrand(Brand brand) {
+		List<Product> products = productRepository
+			.findByBrand(brand);
+
+		if(products.isEmpty()) return;
+		productRepository.deleteAll(products);
 	}
 }
