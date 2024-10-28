@@ -8,10 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.musinsa.common.exception.ApiException;
 import com.musinsa.common.exception.ErrorCode;
 import com.musinsa.showcase.application.port.dto.OutfitOfBrandResponse;
-import com.musinsa.showcase.application.port.dto.OutfitOfLowestPricedCategoryResponse;
 import com.musinsa.showcase.application.port.dto.OutfitOfLowestPricedBrandResponse;
 import com.musinsa.showcase.application.port.dto.ProductOfBrandResponse;
-import com.musinsa.showcase.application.port.dto.ProductResponse;
 import com.musinsa.showcase.application.port.in.FindLowestPricedOutfitByBrandUsecase;
 import com.musinsa.showcase.application.port.out.ReadBrandPort;
 import com.musinsa.showcase.domain.Brand;
@@ -20,7 +18,7 @@ import com.musinsa.showcase.domain.Product;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class BrandService implements
 	FindLowestPricedOutfitByBrandUsecase {

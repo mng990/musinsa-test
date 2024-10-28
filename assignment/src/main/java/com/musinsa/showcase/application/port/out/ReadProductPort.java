@@ -8,4 +8,6 @@ import com.musinsa.showcase.domain.Product;
 public interface ReadProductPort {
 	Product loadProduct(Long productId);
 	List<Product> loadProductsByCategory(Category category);
+	Product loadMinProductByCategory(Category category);
+	Product loadMaxProductByCategory(Category category);
 }

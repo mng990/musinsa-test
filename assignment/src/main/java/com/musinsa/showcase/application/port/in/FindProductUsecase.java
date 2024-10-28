@@ -5,6 +5,6 @@ import java.util.List;
 import com.musinsa.showcase.domain.Category;
 import com.musinsa.showcase.domain.Product;
 
-public interface FindProductsByCategory {
-	public List<Product> findProductsByCategory(Category category);
+public interface FindProductUsecase {
+	public List<Product> byCategory(Category category);
 }
