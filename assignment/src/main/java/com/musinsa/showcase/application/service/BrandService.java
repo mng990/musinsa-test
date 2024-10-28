@@ -84,6 +84,15 @@ public class BrandService implements
 
 	@Override
 	@Transactional
+	public List<Long> saveAll(List<CreateBrandRequest> brands) {
+		return brands
+			.stream()
+			.map(this::save)
+			.toList();
+	}
+
+	@Override
+	@Transactional
 	public void delete(DeleteBrandRequest deleteBrandRequest) {
 		Brand brand = readBrandPort
 			.findById(deleteBrandRequest.brandId())
