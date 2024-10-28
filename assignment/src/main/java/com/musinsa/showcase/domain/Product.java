@@ -14,6 +14,7 @@ import jakarta.persistence.Table;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import com.musinsa.common.entity.BaseEntity;
 
@@ -24,6 +25,7 @@ import com.musinsa.common.entity.BaseEntity;
 public class Product extends BaseEntity {
 
 	@Id @Column
+	@Setter
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 

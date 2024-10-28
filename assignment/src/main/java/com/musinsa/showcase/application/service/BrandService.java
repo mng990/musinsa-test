@@ -12,6 +12,10 @@ import com.musinsa.common.mapper.ProductMapper;
 import com.musinsa.showcase.application.port.in.brand.dto.CreateBrandRequest;
 import com.musinsa.showcase.application.port.in.brand.dto.DeleteBrandRequest;
 import com.musinsa.showcase.application.port.in.brand.dto.UpdateBrandRequest;
+import com.musinsa.showcase.application.port.out.brand.CreateBrandPort;
+import com.musinsa.showcase.application.port.out.brand.DeleteBrandPort;
+import com.musinsa.showcase.application.port.out.brand.ReadBrandPort;
+import com.musinsa.showcase.application.port.out.brand.ReadBrandUsecase;
 import com.musinsa.showcase.application.port.out.brand.dto.OutfitOfBrandResponse;
 import com.musinsa.showcase.application.port.out.brand.dto.OutfitOfLowestPricedBrandResponse;
 import com.musinsa.showcase.application.port.out.brand.dto.ProductOfBrandResponse;
@@ -19,9 +23,6 @@ import com.musinsa.showcase.application.port.in.brand.CreateBrandUsecase;
 import com.musinsa.showcase.application.port.in.brand.DeleteBrandUsecase;
 import com.musinsa.showcase.application.port.in.brand.UpdateBrandUsecase;
 import com.musinsa.showcase.application.port.in.product.FindLowestPricedOutfitByBrandUsecase;
-import com.musinsa.showcase.application.port.out.brand.CreateBrandPort;
-import com.musinsa.showcase.application.port.out.brand.DeleteBrandPort;
-import com.musinsa.showcase.application.port.out.brand.ReadBrandPort;
 import com.musinsa.showcase.application.port.out.product.DeleteProductPort;
 import com.musinsa.showcase.domain.Brand;
 
@@ -33,16 +34,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BrandService implements
 	FindLowestPricedOutfitByBrandUsecase,
+	ReadBrandUsecase,
 	CreateBrandUsecase,
 	UpdateBrandUsecase,
 	DeleteBrandUsecase {
 
-	private final ReadBrandPort readBrandPort;
 	private final CreateBrandPort createBrandPort;
+	private final ReadBrandPort readBrandPort;
 	private final DeleteBrandPort deleteBrandPort;
-	private final DeleteProductPort deleteProductPort;
 
-	private final EntityManager em;
+	private final DeleteProductPort deleteProductPort;
 
 	@Override
 	public OutfitOfLowestPricedBrandResponse findOutfitOfLowestPricedBrand() {
@@ -78,9 +79,7 @@ public class BrandService implements
 			.name(createBrandRequest.name())
 			.build();
 
-		createBrandPort.save(brand);
-		em.flush();
-		return brand.getId();
+		return createBrandPort.save(brand);
 	}
 
 	@Override
@@ -102,5 +101,11 @@ public class BrandService implements
 			.orElseThrow(() -> ApiException.from(ErrorCode.BRAND_NOT_FOUND));
 
 		brand.update(updateBrandRequest.name());
+	}
+
+	@Override
+	public Brand findById(Long id) {
+		return readBrandPort.findById(id)
+			.orElseThrow(() -> ApiException.from(ErrorCode.BRAND_NOT_FOUND));
 	}
 }

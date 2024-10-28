@@ -5,6 +5,6 @@ import java.util.List;
 import com.musinsa.showcase.domain.Brand;
 
 public interface CreateBrandPort {
-	Brand save(Brand brand);
-	List<Brand> saveAll(List<Brand> brands);
+	Long save(Brand brand);
+	List<Long> saveAll(List<Brand> brands);
 }

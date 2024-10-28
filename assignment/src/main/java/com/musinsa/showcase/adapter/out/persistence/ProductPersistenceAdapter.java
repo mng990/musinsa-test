@@ -34,14 +34,10 @@ public class ProductPersistenceAdapter implements
 	}
 
 	@Override
-	public List<Product> findProductsByCategory(Category category) {
-		return productRepository.findByCategory(category);
-	}
-
-	@Override
-	public Product save(Product product) {
+	public Long save(Product product) {
 		return productRepository
-				.save(product);
+				.save(product)
+				.getId();
 	}
 
 	@Override
@@ -69,7 +65,7 @@ public class ProductPersistenceAdapter implements
 	}
 
 	@Override
-	public List<Product> saveAll(List<Product> products) {
+	public List<Long> saveAll(List<Product> products) {
 		return products
 			.stream()
 			.map(this::save)
@@ -79,11 +75,6 @@ public class ProductPersistenceAdapter implements
 	@Override
 	public void delete(Product product) {
 		productRepository.delete(product);
-	}
-
-	@Override
-	public void deleteAll(List<Product> productList) {
-		productRepository.deleteAll(productList);
 	}
 
 	@Override

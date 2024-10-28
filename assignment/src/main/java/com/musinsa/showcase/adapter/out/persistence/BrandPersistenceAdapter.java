@@ -27,16 +27,17 @@ public class BrandPersistenceAdapter implements
 	private final CategoryRepository categoryRepository;
 
 	@Override
-	public Brand save(Brand brand) {
+	public Long save(Brand brand) {
 		return brandRepository
-			.save(brand);
+			.save(brand)
+			.getId();
 	}
 
 	@Override
-	public List<Brand> saveAll(List<Brand> brands) {
+	public List<Long> saveAll(List<Brand> brands) {
 		return brands
 				.stream()
-				.map(this::save)
+				.map(Brand::getId)
 				.toList();
 	}
 
@@ -56,11 +57,6 @@ public class BrandPersistenceAdapter implements
 			.stream()
 			.min((b1, b2) -> totalPriceByBrand(b1).compareTo(totalPriceByBrand(b2)))
 			.get();
-	}
-
-	@Override
-	public List<Brand> findAllBrands() {
-		return brandRepository.findAll();
 	}
 
 	@Override
@@ -92,11 +88,6 @@ public class BrandPersistenceAdapter implements
 	}
 
 	@Override
-	public Boolean exists(Brand brand) {
-		return brandRepository.existsById(brand.getId());
-	}
-
-	@Override
 	public Optional<Brand> findById(Long id) {
 		return brandRepository.findById(id);
 	}
@@ -111,5 +102,10 @@ public class BrandPersistenceAdapter implements
 	@Override
 	public void delete(Brand brand) {
 		brandRepository.delete(brand);
+	}
+
+	@Override
+	public void deleteAll(List<Brand> brands) {
+		brandRepository.deleteAll(brands);
 	}
 }
