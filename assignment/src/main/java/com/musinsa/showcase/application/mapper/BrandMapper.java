@@ -1,4 +1,4 @@
-package com.musinsa.common.mapper;
+package com.musinsa.showcase.application.mapper;
 
 import com.musinsa.showcase.application.port.in.brand.dto.CreateBrandRequest;
 import com.musinsa.showcase.domain.Brand;

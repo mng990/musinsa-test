@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.musinsa.common.exception.ApiException;
 import com.musinsa.common.exception.ErrorCode;
-import com.musinsa.common.mapper.PriceMapper;
-import com.musinsa.common.mapper.ProductMapper;
+import com.musinsa.showcase.application.mapper.PriceMapper;
+import com.musinsa.showcase.application.mapper.ProductMapper;
 import com.musinsa.showcase.application.port.in.brand.dto.CreateBrandRequest;
 import com.musinsa.showcase.application.port.in.brand.dto.DeleteBrandRequest;
 import com.musinsa.showcase.application.port.in.brand.dto.UpdateBrandRequest;
@@ -26,7 +26,6 @@ import com.musinsa.showcase.application.port.in.product.FindLowestPricedOutfitBy
 import com.musinsa.showcase.application.port.out.product.DeleteProductPort;
 import com.musinsa.showcase.domain.Brand;
 
-import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
 @Service

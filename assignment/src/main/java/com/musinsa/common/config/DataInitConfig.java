@@ -1,31 +1,23 @@
 // Data Initialization Configuration
 package com.musinsa.common.config;
 
-import com.musinsa.common.mapper.BrandMapper;
 import com.musinsa.showcase.adapter.out.persistence.BrandRepository;
 import com.musinsa.showcase.adapter.out.persistence.CategoryRepository;
 import com.musinsa.showcase.adapter.out.persistence.ProductRepository;
-import com.musinsa.showcase.application.port.in.brand.dto.CreateBrandRequest;
 import com.musinsa.showcase.application.port.in.product.dto.CreateProductRequest;
-import com.musinsa.showcase.application.port.out.brand.CreateBrandPort;
-import com.musinsa.showcase.application.port.out.category.CreateCategoryPort;
-import com.musinsa.showcase.application.port.out.product.CreateProductPort;
 import com.musinsa.showcase.application.service.BrandService;
 import com.musinsa.showcase.application.service.CategoryService;
 import com.musinsa.showcase.application.service.ProductService;
 import com.musinsa.showcase.domain.Brand;
 import com.musinsa.showcase.domain.Category;
-import com.musinsa.showcase.domain.Product;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.swing.text.html.parser.Entity;
 
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;

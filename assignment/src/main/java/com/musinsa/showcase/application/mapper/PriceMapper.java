@@ -1,4 +1,4 @@
-package com.musinsa.common.mapper;
+package com.musinsa.showcase.application.mapper;
 
 public class PriceMapper {
 
