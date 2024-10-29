@@ -1,4 +1,4 @@
-package com.musinsa.common.mapper;
+package com.musinsa.showcase.application.mapper;
 
 import com.musinsa.showcase.application.port.out.brand.dto.ProductOfBrandResponse;
 import com.musinsa.showcase.application.port.out.category.dto.ProductOfCategoryResponse;

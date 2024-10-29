@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.musinsa.common.exception.ApiException;
 import com.musinsa.common.exception.ErrorCode;
-import com.musinsa.common.mapper.ProductMapper;
+import com.musinsa.showcase.application.mapper.ProductMapper;
 import com.musinsa.showcase.application.port.in.category.CreateCategoryUsecase;
 import com.musinsa.showcase.application.port.out.category.CreateCategoryPort;
 import com.musinsa.showcase.application.port.out.category.dto.OutfitOfLowestPricedCategoryResponse;
